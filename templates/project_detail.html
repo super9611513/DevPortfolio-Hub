@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}{{ project["title"] }}｜DevPortfolio Hub{% endblock %}
+
+{% block content %}
+
+<section class="detail-card">
+
+    <span class="category">
+        {{ project["category"] }}
+    </span>
+
+    <h1>{{ project["title"] }}</h1>
+
+    <p>{{ project["description"] }}</p>
+
+    <h2>使用技術</h2>
+    <p>{{ project["tech_stack"] or "尚未提供" }}</p>
+
+    <h2>專案狀態</h2>
+    <p>{{ project["status"] }}</p>
+
+    {% if project["demo_url"] %}
+    <a class="button"
+       href="{{ project['demo_url'] }}"
+       target="_blank"
+       rel="noopener noreferrer">
+        開啟專案 Demo
+    </a>
+    {% else %}
+    <p>Demo 網址尚未提供。</p>
+    {% endif %}
+
+    {% if project["github_url"] %}
+    <a class="button button-secondary"
+       href="{{ project['github_url'] }}"
+       target="_blank"
+       rel="noopener noreferrer">
+        查看原始碼
+    </a>
+    {% endif %}
+
+    <p>
+        <a href="{{ url_for('project_list') }}">
+            ← 返回所有專案
+        </a>
+    </p>
+
+</section>
+
+{% endblock %}

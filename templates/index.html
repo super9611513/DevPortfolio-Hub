@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}首頁｜DevPortfolio Hub{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+    <p class="eyebrow">OUR PROJECTS</p>
+    <h1>探索技術作品</h1>
+
+    <p>
+        整合網站開發、資料庫與人工智慧應用，
+        展示學習成果與實作能力。
+    </p>
+
+    <a class="button" href="{{ url_for('project_list') }}">
+        瀏覽所有專案
+    </a>
+</section>
+
+<section>
+    <h2>精選專案</h2>
+
+    <div class="project-grid">
+        {% for project in projects %}
+        <article class="project-card">
+
+            <span class="category">
+                {{ project["category"] }}
+            </span>
+
+            <h3>{{ project["title"] }}</h3>
+
+            <p>{{ project["description"] }}</p>
+
+            <p class="tech">
+                技術：{{ project["tech_stack"] }}
+            </p>
+
+            <a class="button"
+               href="{{ url_for('project_detail',
+                               project_id=project['id']) }}">
+                查看專案介紹
+            </a>
+
+        </article>
+        {% else %}
+        <p>目前還沒有精選專案。</p>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}

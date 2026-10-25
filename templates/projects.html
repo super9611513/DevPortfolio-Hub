@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}專案作品｜Project Hub{% endblock %}
+
+{% block content %}
+
+<section class="page-heading">
+    <h1>所有專案</h1>
+    <p>探索團隊開發的不同技術應用。</p>
+</section>
+
+<div class="project-grid">
+    {% for project in projects %}
+    <article class="project-card">
+
+        <span class="category">
+            {{ project["category"] }}
+        </span>
+
+        <h2>{{ project["title"] }}</h2>
+
+        <p>{{ project["description"] }}</p>
+
+        <p class="tech">
+            技術：{{ project["tech_stack"] }}
+        </p>
+
+        <p class="status">
+            狀態：{{ project["status"] }}
+        </p>
+
+        <a class="button"
+           href="{{ url_for('project_detail',
+                           project_id=project['id']) }}">
+            查看詳細介紹
+        </a>
+
+    </article>
+    {% else %}
+    <p>目前沒有專案資料。</p>
+    {% endfor %}
+</div>
+
+{% endblock %}
