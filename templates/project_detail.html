@@ -20,14 +20,27 @@
     <h2>專案狀態</h2>
     <p>{{ project["status"] }}</p>
 
+    {% set has_two = project["demo_url"] and project["demo_url_2"] %}
+
     {% if project["demo_url"] %}
     <a class="button"
        href="{{ project['demo_url'] }}"
        target="_blank"
        rel="noopener noreferrer">
-        開啟專案 Demo
+        {{ "餐廳網站 Demo" if has_two else "開啟專案 Demo" }}
     </a>
-    {% else %}
+    {% endif %}
+
+    {% if project["demo_url_2"] %}
+    <a class="button"
+       href="{{ project['demo_url_2'] }}"
+       target="_blank"
+       rel="noopener noreferrer">
+        {{ "介紹網站 Demo" if has_two else "開啟專案 Demo" }}
+    </a>
+    {% endif %}
+
+    {% if not project["demo_url"] and not project["demo_url_2"] %}
     <p>Demo 網址尚未提供。</p>
     {% endif %}
 
