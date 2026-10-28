@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS projects (
     description TEXT NOT NULL,
     tech_stack TEXT,
     demo_url TEXT,
+    demo_url_2 TEXT,
     github_url TEXT,
     image_url TEXT,
     status TEXT DEFAULT '開發中',
@@ -69,6 +70,11 @@ if count == 0:
         )
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     """, projects)
+
+# 舊資料庫補上 demo_url_2 欄位（已存在則略過）
+columns = [r[1] for r in conn.execute("PRAGMA table_info(projects)")]
+if "demo_url_2" not in columns:
+    conn.execute("ALTER TABLE projects ADD COLUMN demo_url_2 TEXT")
 
 conn.commit()
 conn.close()
